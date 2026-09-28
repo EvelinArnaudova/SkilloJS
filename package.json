@@ -1,0 +1,20 @@
+{
+  "name": "js-playwright-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test:lecture-01": "node lectures/01-development-env-basics/homework/homework-solved.js",
+    "test:lecture-02": "node lectures/02-js-fundamentals-for-testing/homework/homework-solved.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.8"
+  }
+}

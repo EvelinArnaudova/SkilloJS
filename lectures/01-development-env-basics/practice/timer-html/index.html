@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skillo Lecture Countdown</title>
+    <style>
+      :root {
+        --accent: #7c5cff;
+        --accent-glow: #a78bfa;
+        --bg-dark: #0b0b17;
+        --card-bg: rgba(255, 255, 255, 0.06);
+        --card-border: rgba(255, 255, 255, 0.12);
+        --text-muted: #b8b8d1;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(124, 92, 255, 0.25),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(56, 189, 248, 0.2),
+            transparent 45%
+          ),
+          var(--bg-dark);
+        color: white;
+        overflow: hidden;
+      }
+
+      .card {
+        position: relative;
+        width: min(90vw, 480px);
+        padding: 3rem 2.5rem;
+        text-align: center;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        backdrop-filter: blur(16px);
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.45),
+          0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: #38bdf8;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        margin: 0 0 2rem;
+        font-size: 1rem;
+      }
+
+      .timer {
+        font-size: clamp(3rem, 12vw, 5rem);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        font-variant-numeric: tabular-nums;
+        background: linear-gradient(135deg, #ffffff, var(--accent-glow));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 40px rgba(124, 92, 255, 0.35);
+      }
+
+      .progress-track {
+        margin-top: 2rem;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+        transform-origin: left;
+        transition: transform 1s linear;
+        box-shadow: 0 0 16px var(--accent-glow);
+      }
+
+      .message {
+        display: none;
+        font-size: clamp(1.6rem, 6vw, 2.5rem);
+        font-weight: 700;
+        line-height: 1.3;
+        background: linear-gradient(
+          135deg,
+          #ffffff,
+          #7dd3fc,
+          var(--accent-glow)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: pulse-glow 1.6s ease-in-out infinite;
+      }
+
+      .message.visible {
+        display: block;
+      }
+
+      .timer-group.hidden {
+        display: none;
+      }
+
+      .skip-button {
+        margin-top: 1.75rem;
+        padding: 0.65rem 1.75rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: white;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--card-border);
+        border-radius: 999px;
+        cursor: pointer;
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .skip-button:hover {
+        background: rgba(124, 92, 255, 0.25);
+        box-shadow: 0 0 20px rgba(124, 92, 255, 0.35);
+        transform: translateY(-1px);
+      }
+
+      .skip-button:active {
+        transform: translateY(0);
+      }
+
+      .minute-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .minute-controls-label {
+        min-width: 7rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .minute-button {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1;
+        color: white;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--card-border);
+        border-radius: 50%;
+        cursor: pointer;
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .minute-button:hover:not(:disabled) {
+        background: rgba(124, 92, 255, 0.25);
+        box-shadow: 0 0 20px rgba(124, 92, 255, 0.35);
+        transform: translateY(-1px);
+      }
+
+      .minute-button:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      .minute-button:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.5));
+          transform: scale(1);
+        }
+
+        50% {
+          filter: drop-shadow(0 0 28px rgba(125, 211, 252, 0.7));
+          transform: scale(1.03);
+        }
+      }
+
+      .glow-orb {
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+        z-index: -1;
+      }
+
+      .glow-orb.one {
+        top: -60px;
+        left: -60px;
+        background: var(--accent);
+      }
+
+      .glow-orb.two {
+        bottom: -60px;
+        right: -60px;
+        background: #38bdf8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="glow-orb one"></div>
+      <div class="glow-orb two"></div>
+
+      <p class="logo">Skillo</p>
+      <p class="subtitle" id="subtitle">The lecture begins in</p>
+
+      <div class="timer-group" id="timerGroup">
+        <div class="minute-controls">
+          <button
+            class="minute-button"
+            id="decreaseButton"
+            type="button"
+            aria-label="Decrease minutes"
+          >
+            −
+          </button>
+          <span class="minute-controls-label">Adjust minutes</span>
+          <button
+            class="minute-button"
+            id="increaseButton"
+            type="button"
+            aria-label="Increase minutes"
+          >
+            +
+          </button>
+        </div>
+        <div class="timer" id="timer">05:00</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <button class="skip-button" id="skipButton" type="button">
+          Skip timer
+        </button>
+      </div>
+
+      <p class="message" id="message">The Skillo lecture is starting NOW! 🚀</p>
+    </div>
+
+    <script>
+      const INITIAL_SECONDS = 5 * 60;
+      const MIN_SECONDS = 0;
+      const MAX_SECONDS = 60 * 60;
+      const MINUTE_STEP = 60;
+
+      const timerEl = document.getElementById("timer");
+      const timerGroupEl = document.getElementById("timerGroup");
+      const progressFillEl = document.getElementById("progressFill");
+      const subtitleEl = document.getElementById("subtitle");
+      const messageEl = document.getElementById("message");
+      const skipButtonEl = document.getElementById("skipButton");
+      const decreaseButtonEl = document.getElementById("decreaseButton");
+      const increaseButtonEl = document.getElementById("increaseButton");
+
+      // totalSeconds is the progress-bar denominator; it grows if time is added beyond the start value.
+      let totalSeconds = INITIAL_SECONDS;
+      let secondsLeft = INITIAL_SECONDS;
+      let intervalId = null;
+
+      function formatTime(totalSeconds) {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+      }
+
+      function updateMinuteButtons() {
+        decreaseButtonEl.disabled = secondsLeft <= MIN_SECONDS;
+        increaseButtonEl.disabled = secondsLeft >= MAX_SECONDS;
+      }
+
+      function renderTimer() {
+        timerEl.textContent = formatTime(secondsLeft);
+        progressFillEl.style.transform = `scaleX(${secondsLeft / totalSeconds})`;
+        updateMinuteButtons();
+      }
+
+      function showStartMessage() {
+        subtitleEl.remove();
+        timerGroupEl.classList.add("hidden");
+        messageEl.classList.add("visible");
+      }
+
+      function finishCountdown() {
+        clearInterval(intervalId);
+        secondsLeft = 0;
+        renderTimer();
+        showStartMessage();
+      }
+
+      renderTimer();
+
+      intervalId = setInterval(() => {
+        secondsLeft -= 1;
+
+        if (secondsLeft <= 0) {
+          finishCountdown();
+          return;
+        }
+
+        renderTimer();
+      }, 1000);
+
+      skipButtonEl.addEventListener("click", () => {
+        finishCountdown();
+      });
+
+      decreaseButtonEl.addEventListener("click", () => {
+        secondsLeft = Math.max(MIN_SECONDS, secondsLeft - MINUTE_STEP);
+
+        if (secondsLeft <= MIN_SECONDS) {
+          finishCountdown();
+          return;
+        }
+
+        renderTimer();
+      });
+
+      increaseButtonEl.addEventListener("click", () => {
+        secondsLeft = Math.min(MAX_SECONDS, secondsLeft + MINUTE_STEP);
+        totalSeconds = Math.max(totalSeconds, secondsLeft);
+        renderTimer();
+      });
+    </script>
+  </body>
+</html>
