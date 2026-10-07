@@ -5,7 +5,6 @@ let isLoggedIn = true;
 const baseURL = "https://demo.qa.com";
 const loginPageURL = "https://demo.qa.com/login";
 const expectedHTTPStatus = 200;
-let isWelcomeMessageDisplayed = true;
 let actualHTTPStatus = 503;
 let counter = 0;
 

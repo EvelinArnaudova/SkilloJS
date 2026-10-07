@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test:lecture-01": "node lectures/01-development-env-basics/homework/homework-solved.js",
-    "test:lecture-02": "node lectures/02-js-fundamentals-for-testing/homework/homework-solved.js"
+    "test:lecture-02": "node lectures/02-js-fundamentals-for-testing/homework/homework-solved.js",
+    "lint": "npx eslint ."
   },
   "keywords": [],
   "author": "",
