@@ -27,6 +27,7 @@ for (const user of testUsers) {
   if (!user) {
     continue;
   }
+  console.log(`Testing user: ${user}`);
 }
 
 //Homework: task 6
@@ -40,6 +41,7 @@ for (const browser of browsers) {
       console.log(`Skipping ${browser} on ${environment}`);
       continue;
     }
+    console.log(`${browser} on ${environment}`);
   }
 }
 
@@ -52,4 +54,5 @@ for (const statusCode of statusCodes) {
     console.log(`The test has stopped, because status code is: ${statusCode}`);
     break;
   }
+  console.log(`The test has passed with status code: ${statusCode}`);
 }
