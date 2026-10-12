@@ -6,9 +6,7 @@ const baseURL = "https://demo.qa.com";
 const loginPageURL = "https://demo.qa.com/login";
 const expectedHTTPStatus = 200;
 let actualHTTPStatus = 503;
-let counter = 0;
 
-console.log("-----------==============-----------");
 //Second homework assignment
 console.log("Username:", username, "| type:", typeof username);
 console.log("User ID:", userId, "| type:", typeof userId);
@@ -27,49 +25,46 @@ console.log(
   typeof actualHTTPStatus,
 );
 
-console.log("-----------==============-----------");
 //Third homework assignment
 function createUserMessage(firstName, lastName) {
   return `Welcome, ${firstName} ${lastName}! You get 10% discount on your first purchase.`;
 }
 console.log(createUserMessage("Evelin", "Arnaudova"));
 
-console.log("-----------==============-----------");
 //Fourth homework assignment
-function validateStatus(actualHTTPStatus, expectedHTTPStatus) {
-  counter = counter + 1;
-  console.log("Actual HTTP status:", actualHTTPStatus);
-  console.log("Expected HTTP status:", expectedHTTPStatus);
-  if (actualHTTPStatus === expectedHTTPStatus) {
-    return "PASS";
-  } else {
-    return "FAIL";
+function validateStatus(actual, expected) {
+  console.log("Actual HTTP status:", actual);
+  console.log("Expected HTTP status:", expected);
+  const passed = actual === expected;
+  console.log("Validation:", passed ? "PASS" : "FAIL");
+  return passed;
+}
+
+validateStatus(actualHTTPStatus, expectedHTTPStatus);
+
+//Fifth homework assignment
+function printTestSummary(...checks) {
+  let passes = 0;
+  for (const check of checks) {
+    if (check) {
+      passes++;
+    }
   }
+  const failures = checks.length - passes;
+
+  console.log("Test Summary:");
+  console.log("- Checks:", checks.length);
+  console.log("- Passes:", passes);
+  console.log("- Failures:", failures);
+  console.log("- Overall result:", failures === 0 ? "PASS" : "FAIL");
 }
 
 const check1 = validateStatus(actualHTTPStatus, expectedHTTPStatus);
-console.log("Validation result:", check1);
-
 actualHTTPStatus = 200;
 const check2 = validateStatus(actualHTTPStatus, expectedHTTPStatus);
-console.log("Validation result:", check2);
-
-console.log("-----------==============-----------");
-//Fifth homework assignment
-
-function printTestSummary(check1, check2) {
-  console.log("Test Summary:");
-  console.log("- Check 1:", check1);
-  console.log("- Check 2:", check2);
-  console.log("- Total validations:", counter);
-}
-
 printTestSummary(check1, check2);
 
-console.log("-----------==============-----------");
-
 //Optional homework assignment
-
 function enterbaseURL(baseURL) {
   console.log("Navigating to base URL:", baseURL);
 }
