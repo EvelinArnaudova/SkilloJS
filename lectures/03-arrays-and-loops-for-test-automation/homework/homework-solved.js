@@ -1,6 +1,6 @@
 //Homework: task 1, 2, 3 and 4
 
-let testResults = [200, 201, 404, 200, 500, 204];
+const testResults = [200, 201, 404, 200, 500, 204];
 let counterPASSED = 0;
 let counterFAILED = 0;
 let counterALL = 0;
@@ -26,8 +26,6 @@ const testUsers = ["user123", "", "user5768", "blablaUser", ""];
 for (const user of testUsers) {
   if (!user) {
     continue;
-  } else {
-    console.log(`Testing user: ${user}`);
   }
 }
 
@@ -41,23 +39,17 @@ for (const browser of browsers) {
     if (browser === "Safari" && environment === "QA") {
       console.log(`Skipping ${browser} on ${environment}`);
       continue;
-    } else {
-      console.log(`${browser} on ${environment}`);
     }
   }
 }
 
 //Optimal challenge
 
-let statusCodes = [200, 201, 404, 304, 500, 502];
+const statusCodes = [200, 201, 404, 304, 500, 502];
 
 for (const statusCode of statusCodes) {
   if (statusCode >= 500 && statusCode < 600) {
-    console.log(`CRITICAL ERROR: ${statusCode}`);
+    console.log(`The test has stopped, because status code is: ${statusCode}`);
     break;
-  } else if (statusCode >= 300 && statusCode < 500) {
-    console.log(`WARNING: ${statusCode}`);
-  } else {
-    console.log(`INFO: ${statusCode}`);
   }
 }
