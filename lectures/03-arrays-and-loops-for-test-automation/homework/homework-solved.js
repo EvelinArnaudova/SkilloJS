@@ -1,4 +1,4 @@
-//Homework: task 1,2,3,and 4
+//Homework: task 1, 2, 3 and 4
 
 let testResults = [200, 201, 404, 200, 500, 204];
 let counterPASSED = 0;
@@ -55,10 +55,9 @@ for (const statusCode of statusCodes) {
   if (statusCode >= 500 && statusCode < 600) {
     console.log(`CRITICAL ERROR: ${statusCode}`);
     break;
-  } else if (statusCode >=300 && statusCode < 500) {
+  } else if (statusCode >= 300 && statusCode < 500) {
     console.log(`WARNING: ${statusCode}`);
   } else {
     console.log(`INFO: ${statusCode}`);
   }
 }
-

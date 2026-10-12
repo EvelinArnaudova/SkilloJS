@@ -58,8 +58,16 @@ if (isUserLoggedIn && expectedStatus === 200) {
 // Sixth point of homework
 console.log("---------------------");
 
-let result = maxResponseTime >= responseTime ? "PASS" : "FAIL";
-console.log(`Max response time test result: ${result}`);
+// let result = maxResponseTime >= responseTime ? "PASS" : "FAIL";
+// console.log(`Max response time test result: ${result}`);
+
+const result =
+  actualStatus !== expectedStatus
+    ? "FAIL: Unexpected status code"
+    : responseTime >= maxResponseTime
+      ? "FAIL: Response too slow"
+      : "PASS: API response is valid";
+console.log(`API status test result: ${result}`);
 
 //Optimal challenge task
 console.log("---------------------");
@@ -73,19 +81,18 @@ if (attemptNumber < maxAttempts && statusCheck === "FAIL") {
 } else console.log("FAIL");
 
 //Enchanced optimal challenge task using Copilot
-console.log("---------------------");   
+console.log("---------------------");
 
 const expectedStatus1 = 200;
 const actualStatus1 = 500;
 const attemptNumber1 = 3;
 const maxAttempts1 = 5;
 
-
 const statusCheck1 = actualStatus1 === expectedStatus1 ? "PASS" : "FAIL";
 
 if (statusCheck1 === "FAIL" && attemptNumber1 < maxAttempts1) {
   console.log("RETRY");
-} else if (statusCheck1=== "FAIL") {
+} else if (statusCheck1 === "FAIL") {
   console.log("FAIL");
 } else {
   console.log("PASS");
