@@ -9,6 +9,7 @@
     "test:lecture-02": "node lectures/02-js-fundamentals-for-testing/homework/homework-solved.js",
     "test:lecture-03": "node lectures/03-arrays-and-loops-for-test-automation/homework/homework-solved.js",
     "test:lecture-04": "node lectures/04-advanced-array-methods/homework/homework-solved.js",
+    "test:lecture-05": "node lectures/05-functions-deep-dive-and-modules/homework/extra-homework.js",
     "lint": "npx eslint ."
   },
   "keywords": [],
