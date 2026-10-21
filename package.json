@@ -10,6 +10,7 @@
     "test:lecture-03": "node lectures/03-arrays-and-loops-for-test-automation/homework/homework-solved.js",
     "test:lecture-04": "node lectures/04-advanced-array-methods/homework/homework-solved.js",
     "test:lecture-05": "node lectures/05-functions-deep-dive-and-modules/homework/extra-homework.js",
+    "test:lecture-06": "node lectures/06-objects-and-classes/homework/homework-solved.js",
     "lint": "npx eslint ."
   },
   "keywords": [],
@@ -17,7 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "eslint": "^10.11.0",
+    "eslint": "^10.13.0",
     "globals": "^17.12.0",
     "prettier": "^3.9.8"
   }
