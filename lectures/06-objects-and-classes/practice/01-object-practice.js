@@ -17,19 +17,19 @@ console.log(
   "Practice: destructure name and owner out of testCase into two variables and log them.",
 );
 
-const testUser1 = {
-  user: "qa-team",
-  email: "qa-team@example.com",
-  role: "tester",
-  isActive: true
-};
+// const testUser1 = {
+//   user: "qa-team",
+//   email: "qa-team@example.com",
+//   role: "tester",
+//   isActive: true
+// };
 
-const testUser2 = {
-  user: "qa-team",
-  email: "qa-team@example.com",
-  role: "tester",
-  isActive: true
-};
+// const testUser2 = {
+//   user: "qa-team",
+//   email: "qa-team@example.com",
+//   role: "tester",
+//   isActive: true
+// };
 
 class TestUser {
   constructor(user, email, role, isActive, password) {

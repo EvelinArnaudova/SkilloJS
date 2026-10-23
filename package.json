@@ -11,6 +11,7 @@
     "test:lecture-04": "node lectures/04-advanced-array-methods/homework/homework-solved.js",
     "test:lecture-05": "node lectures/05-functions-deep-dive-and-modules/homework/extra-homework.js",
     "test:lecture-06": "node lectures/06-objects-and-classes/homework/homework-solved.js",
+    "test:lecture-07": "node lectures/07-error-handling/homework/homework-solved.js",
     "lint": "npx eslint ."
   },
   "keywords": [],
