@@ -11,6 +11,16 @@ console.log("Async demo started");
 
 setTimeout(() => {
   console.log("Async operation completed");
-}, 1000);
+}, 5000);
 
 console.log("Async demo finished (this logs before the timeout callback)");
+
+
+const promise = new Promise((resolve) => {
+  resolve("Test data loaded");
+});
+
+promise.then(result => {
+  console.log(result);
+});
+
