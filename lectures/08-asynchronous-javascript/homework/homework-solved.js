@@ -74,7 +74,7 @@ async function runTestsInParallel() {
 
 runTestsInParallel();
 
-//Optional challenge
+//Optional challenge with help from Copilot
 
 async function validateTestResult(testResultPromise) {
   const result = await testResultPromise;
