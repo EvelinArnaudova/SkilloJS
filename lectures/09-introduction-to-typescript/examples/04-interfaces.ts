@@ -2,21 +2,21 @@
 
 // An interface describes the expected shape of an object: which
 // properties must exist and what type each one has.
-interface User {
-  username: string;
-  email: string;
-  role: string;
-  isActive: boolean;
-}
+// interface User {
+//   username: string;
+//   email: string;
+//   role: string;
+//   isActive: boolean;
+// }
 
-const user: User = {
-  username: "alice",
-  email: "alice@example.com",
-  role: "admin",
-  isActive: true,
-};
+// const user: User = {
+//   username: "alice",
+//   email: "alice@example.com",
+//   role: "admin",
+//   isActive: true,
+// };
 
-console.log(user);
+// console.log(user);
 
 // Interfaces are a convenient way to describe the shape of an API
 // response, even though they do not validate the real response at runtime.
