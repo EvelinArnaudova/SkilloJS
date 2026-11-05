@@ -15,7 +15,6 @@
     "lecture-08": "node lectures/08-asynchronous-javascript/homework/homework-solved.js",
     "lecture-09": "tsx lectures/09-introduction-to-typescript/homework/homework-solved.ts",
     "lecture-10": "tsx lectures/10-typescript-classes-generics-and-enums/homework/homework-solved.ts",
-    "exam": "node lectures/09-introduction-to-typescript/homework/exam-solution.js",
     "typecheck": "tsc",
     "lint": "npx eslint ."
   },
